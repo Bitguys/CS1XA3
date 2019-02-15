@@ -1,10 +1,14 @@
 #!/bin/bash
-
+cd ..
 if [ $# -eq 1 ]
 then
    if [ $1 -eq 1 ]
    then
 	echo "Create a TODO log"
+	if [ -e "todo.log" ]
+	then
+	  rm todo.log
+	fi
 	arr=$(git ls-files)
 	for files in $arr;
 	do
