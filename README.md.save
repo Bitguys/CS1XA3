@@ -1,0 +1,17 @@
+# CS1XA3
+Project01:
+	How to use the script to execute some features:
+	    1.Executing the feature of Creating a TODO log:
+	      ./script 1
+	    
+	    2.To collect all the error messages when compling the fail:
+	      ./script 2
+	    
+            3.To merge log:
+	      ./script 3
+	
+            4.Count the type of the file:
+	      ./script 4	
+	
+	    5.Delete all the temporary files:
+	      ./script 5

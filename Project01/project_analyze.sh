@@ -5,15 +5,14 @@ then
    if [ $1 -eq 1 ]
    then
 	echo "Create a TODO log"
-	
-	if [ -e "todo.log" ]
-	then
-	   rm todo.log
-	fi
 	arr=$(git ls-files)
 	for files in $arr;
 	do
-	 echo  $files
+	 while IFS= read line
+	 do
+	 
+	    echo $line "#TODO" >> todo.log
+	 done <"$files"
 	done
    elif [ $1 -eq 2 ]
    then 
