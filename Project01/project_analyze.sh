@@ -1,23 +1,11 @@
 #!/bin/bash
-cd ..
+
 if [ $# -eq 1 ]
 then
+   
    if [ $1 -eq 1 ]
    then
-	echo "Create a TODO log"
-	if [ -e "todo.log" ]
-	then
-	  rm todo.log
-	fi
-	arr=$(git ls-files)
-	for files in $arr;
-	do
-	 while IFS= read line
-	 do
-	 
-	    echo $line "#TODO" >> todo.log
-	 done <"$files"
-	done
+	grep -r --exclude="todo.log" "#TODO" > ~/CS1XA3/Project01/todo.log
    elif [ $1 -eq 2 ]
    then 
 	echo "Compile Error log"
@@ -41,3 +29,5 @@ then
 else
    echo "Incorrect number of the arguments"
 fi
+
+exit
