@@ -83,6 +83,10 @@ then
    elif [ $1 -eq 5 ]
    then 
 	echo "Delete Temporary Files"
+	list=$(git ls-files ~/CS1XA3/ --exclude-standard --others)
+	for files in $list;do
+	  rm $files
+	done 
    elif [ $1 -eq 6 ]
    then
 	echo "Find Last Working File"
