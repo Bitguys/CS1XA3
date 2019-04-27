@@ -1,0 +1,33 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: url(back.jpg)no-repeat center center fixed;
+    background-size: cover;
+    background-position: 40cm;
+    font-family: sans-serif;
+}
+
+.box{
+
+ 
+    background: #b84444;
+    color: red;
+    top: 30%;
+    left: 50%;
+    position:absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 400px 300px;
+}
+
+
+
+
+h1{
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: justify;
+    font-size: 22px;
+    color: black;
+}
+
