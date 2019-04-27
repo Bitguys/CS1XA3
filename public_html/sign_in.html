@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Login</title>
+  <title>Sign_in</title>
 </head>
 
 <body>
@@ -4972,12 +4972,12 @@ var elm$json$Json$Decode$errorToStringHelp = F2(
 	});
 var elm$core$Platform$Cmd$batch = _Platform_batch;
 var elm$core$Platform$Cmd$none = elm$core$Platform$Cmd$batch(_List_Nil);
-var author$project$Login$init = function (_n0) {
+var author$project$Sign_in$init = function (_n0) {
 	return _Utils_Tuple2(
 		{error: '', name: '', password: ''},
 		elm$core$Platform$Cmd$none);
 };
-var author$project$Login$handleError = F2(
+var author$project$Sign_in$handleError = F2(
 	function (model, error) {
 		switch (error.$) {
 			case 'BadUrl':
@@ -5007,8 +5007,8 @@ var author$project$Login$handleError = F2(
 					{error: 'bad body ' + body});
 		}
 	});
-var author$project$Login$GotLoginResponse = function (a) {
-	return {$: 'GotLoginResponse', a: a};
+var author$project$Sign_in$GotSignupResponse = function (a) {
+	return {$: 'GotSignupResponse', a: a};
 };
 var elm$json$Json$Encode$object = function (pairs) {
 	return _Json_wrap(
@@ -5024,7 +5024,7 @@ var elm$json$Json$Encode$object = function (pairs) {
 			pairs));
 };
 var elm$json$Json$Encode$string = _Json_wrap;
-var author$project$Login$passwordEncoder = function (model) {
+var author$project$Sign_in$passwordEncoder = function (model) {
 	return elm$json$Json$Encode$object(
 		_List_fromArray(
 			[
@@ -5914,13 +5914,13 @@ var elm$http$Http$post = function (r) {
 	return elm$http$Http$request(
 		{body: r.body, expect: r.expect, headers: _List_Nil, method: 'POST', timeout: elm$core$Maybe$Nothing, tracker: elm$core$Maybe$Nothing, url: r.url});
 };
-var author$project$Login$loginPost = function (model) {
+var author$project$Sign_in$loginPost = function (model) {
 	return elm$http$Http$post(
 		{
 			body: elm$http$Http$jsonBody(
-				author$project$Login$passwordEncoder(model)),
-			expect: elm$http$Http$expectString(author$project$Login$GotLoginResponse),
-			url: 'https://mac1xa3.ca/e/guox54/login/'
+				author$project$Sign_in$passwordEncoder(model)),
+			expect: elm$http$Http$expectString(author$project$Sign_in$GotSignupResponse),
+			url: 'https://mac1xa3.ca/e/guox54/adduser/'
 		});
 };
 var elm$browser$Browser$External = function (a) {
@@ -6154,7 +6154,7 @@ var elm$url$Url$fromString = function (str) {
 		A2(elm$core$String$dropLeft, 8, str)) : elm$core$Maybe$Nothing);
 };
 var elm$browser$Browser$Navigation$load = _Browser_load;
-var author$project$Login$update = F2(
+var author$project$Sign_in$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
 			case 'NewName':
@@ -6171,46 +6171,37 @@ var author$project$Login$update = F2(
 						model,
 						{password: password}),
 					elm$core$Platform$Cmd$none);
-			case 'LoginButton':
+			case 'SignupButton':
 				return _Utils_Tuple2(
 					model,
-					author$project$Login$loginPost(model));
+					author$project$Sign_in$loginPost(model));
 			default:
 				var result = msg.a;
 				if (result.$ === 'Ok') {
-					switch (result.a) {
-						case 'Username: no exist or wrong password':
-							return _Utils_Tuple2(
-								_Utils_update(
-									model,
-									{error: 'Failed to login'}),
-								elm$core$Platform$Cmd$none);
-						case 'Success! Hello ':
-							return _Utils_Tuple2(
-								_Utils_update(
-									model,
-									{error: 'Succeed in logging'}),
-								elm$core$Platform$Cmd$none);
-						default:
-							return _Utils_Tuple2(
-								model,
-								elm$browser$Browser$Navigation$load('https://mac1xa3.ca/u/guox54/2048.html'));
+					if (result.a === 'Succeed') {
+						return _Utils_Tuple2(
+							model,
+							elm$browser$Browser$Navigation$load('https://mac1xa3.ca/u/guox54/2048.html'));
+					} else {
+						return _Utils_Tuple2(
+							model,
+							elm$browser$Browser$Navigation$load('https://mac1xa3.ca/u/guox54/2048.html'));
 					}
 				} else {
 					var error = result.a;
 					return _Utils_Tuple2(
-						A2(author$project$Login$handleError, model, error),
+						A2(author$project$Sign_in$handleError, model, error),
 						elm$core$Platform$Cmd$none);
 				}
 		}
 	});
-var author$project$Login$LoginButton = {$: 'LoginButton'};
-var author$project$Login$NewName = function (a) {
+var author$project$Sign_in$NewName = function (a) {
 	return {$: 'NewName', a: a};
 };
-var author$project$Login$NewPassword = function (a) {
+var author$project$Sign_in$NewPassword = function (a) {
 	return {$: 'NewPassword', a: a};
 };
+var author$project$Sign_in$SignupButton = {$: 'SignupButton'};
 var elm$html$Html$input = _VirtualDom_node('input');
 var elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -6255,7 +6246,7 @@ var elm$html$Html$Events$onInput = function (tagger) {
 			elm$html$Html$Events$alwaysStop,
 			A2(elm$json$Json$Decode$map, tagger, elm$html$Html$Events$targetValue)));
 };
-var author$project$Login$viewInput = F4(
+var author$project$Sign_in$viewInput = F4(
 	function (t, p, v, toMsg) {
 		return A2(
 			elm$html$Html$input,
@@ -6287,7 +6278,7 @@ var elm$html$Html$Events$onClick = function (msg) {
 		'click',
 		elm$json$Json$Decode$succeed(msg));
 };
-var author$project$Login$view = function (model) {
+var author$project$Sign_in$view = function (model) {
 	return A2(
 		elm$html$Html$div,
 		_List_Nil,
@@ -6298,8 +6289,8 @@ var author$project$Login$view = function (model) {
 				_List_Nil,
 				_List_fromArray(
 					[
-						A4(author$project$Login$viewInput, 'text', 'Name', model.name, author$project$Login$NewName),
-						A4(author$project$Login$viewInput, 'password', 'Password', model.password, author$project$Login$NewPassword)
+						A4(author$project$Sign_in$viewInput, 'text', 'Name', model.name, author$project$Sign_in$NewName),
+						A4(author$project$Sign_in$viewInput, 'password', 'Password', model.password, author$project$Sign_in$NewPassword)
 					])),
 				A2(
 				elm$html$Html$div,
@@ -6310,11 +6301,11 @@ var author$project$Login$view = function (model) {
 						elm$html$Html$button,
 						_List_fromArray(
 							[
-								elm$html$Html$Events$onClick(author$project$Login$LoginButton)
+								elm$html$Html$Events$onClick(author$project$Sign_in$SignupButton)
 							]),
 						_List_fromArray(
 							[
-								elm$html$Html$text('Login')
+								elm$html$Html$text('Sign-in')
 							])),
 						elm$html$Html$text(model.error)
 					]))
@@ -6323,19 +6314,19 @@ var author$project$Login$view = function (model) {
 var elm$browser$Browser$element = _Browser_element;
 var elm$core$Platform$Sub$batch = _Platform_batch;
 var elm$core$Platform$Sub$none = elm$core$Platform$Sub$batch(_List_Nil);
-var author$project$Login$main = elm$browser$Browser$element(
+var author$project$Sign_in$main = elm$browser$Browser$element(
 	{
-		init: author$project$Login$init,
+		init: author$project$Sign_in$init,
 		subscriptions: function (_n0) {
 			return elm$core$Platform$Sub$none;
 		},
-		update: author$project$Login$update,
-		view: author$project$Login$view
+		update: author$project$Sign_in$update,
+		view: author$project$Sign_in$view
 	});
-_Platform_export({'Login':{'init':author$project$Login$main(
+_Platform_export({'Sign_in':{'init':author$project$Sign_in$main(
 	elm$json$Json$Decode$succeed(_Utils_Tuple0))(0)}});}(this));
 
-var app = Elm.Login.init({ node: document.getElementById("elm-f0111bc4e658d0f98db96260c16f7e49") });
+var app = Elm.Sign_in.init({ node: document.getElementById("elm-f0111bc4e658d0f98db96260c16f7e49") });
 if (document.getElementById("elm-f0111bc4e658d0f98db96260c16f7e49"))
 {
   document.getElementById("elm-f0111bc4e658d0f98db96260c16f7e49").innerText = 'This is a headless program, meaning there is nothing to show here.\n\nI started the program anyway though, and you can access it as `app` in the developer console.';
